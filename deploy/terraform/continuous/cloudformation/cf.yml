@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  EnvName:
+    Description: Environment type.
+    Default: dev
+    Type: String
+    AllowedValues: [dev, int, uat, prod]
+    ConstraintDescription: must specify prod, dev, or test.
+
+Conditions:
+  CreateProdResources: !Equals [!Ref EnvName, prod]
+  CreateNonProdResources: !Not [!Equals [!Ref EnvName, prod] ]
+
+Resources:
+  EmailSubscription:
+    Condition: CreateNonProdResources
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      TopicArn: "${topic_arn}"
+      Endpoint: "${sns_subscription_email_address_list}"
+      Protocol: "email"
+
+  PagerDutySubscription:
+    Condition: CreateProdResources
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      TopicArn:  "${topic_arn}"
+      Endpoint: "${sns_topic_https_endpoint}"
+      Protocol: https
