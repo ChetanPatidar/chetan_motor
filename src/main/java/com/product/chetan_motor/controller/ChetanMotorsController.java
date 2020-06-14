@@ -29,7 +29,7 @@ public class ChetanMotorsController {
      * This is my first endpoint which will return helo string for any request looking for hello.
      * Method level requets mapping.
      *
-     * @return
+     * @return the String
      */
     @RequestMapping("/hello")
     public String getHello() {
@@ -79,6 +79,7 @@ public class ChetanMotorsController {
     //Create Product
     @RequestMapping("/createproduct")
     public List<HostMaster> createProduct() {
+
         return null;
     }
 
