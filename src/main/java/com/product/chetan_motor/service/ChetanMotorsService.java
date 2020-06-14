@@ -16,7 +16,7 @@ public class ChetanMotorsService {
     }
 
     public String getHelloStringService(String helloParams) {
-        HostMaster emp = restTemplate.getForObject("http://localhost:8080/datacenter/gethostdetails", HostMaster.class);
+        HostMaster emp = restTemplate.getForObject("http://localhost:7090/datacenter/gethostdetails", HostMaster.class);
         return "Hello from param Service class::" + emp;
     }
 
